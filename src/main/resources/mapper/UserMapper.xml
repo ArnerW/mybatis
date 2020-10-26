@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arner.mybatis.mapper.UserMapper">
+    <!--    mybatis里用resultMap来映射-->
+    <resultMap id="BaseResultMapper" type="com.arner.mybatis.entity.User">
+    <!--    对应数据的主键 大多数是id-->
+    <id column="id" property="id"/>
+    <!--    对应其他普通字段-->
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <result column="status" property="status"/>
+</resultMap>
+
+<!--    sql语句 方法-->
+<insert id="insert">
+    <!--    接口中的参数如何在xml中使用-->
+    insert into user (username, password)
+        values (#{user.username}, #{user.password})
+</insert>
+
+<select id="selectById" resultMap="BaseResultMapper">
+    select id,username,password,status from user where status = 1 and id = #{id};
+</select>
+</mapper>
